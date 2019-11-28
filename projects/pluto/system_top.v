@@ -60,10 +60,7 @@ module system_top (
   inout           fixed_io_ps_porb,
   inout           fixed_io_ps_srstb,
 
-  inout           iic_scl,
-  inout           iic_sda,
-
-  inout           gpio_bd,
+  inout   [ 4:0]  gpio_bd,
 
   input           rx_clk_in,
   input           rx_frame_in,
@@ -88,18 +85,17 @@ module system_top (
 
   // internal signals
 
-  wire    [16:0]  gpio_i;
-  wire    [16:0]  gpio_o;
-  wire    [16:0]  gpio_t;
+  wire    [18:0]  gpio_i;
+  wire    [18:0]  gpio_o;
+  wire    [18:0]  gpio_t;
 
-  assign gpio_i[16:15] = gpio_o[16:15];
   // instantiations
 
-  ad_iobuf #(.DATA_WIDTH(15)) i_iobuf (
-    .dio_t (gpio_t[14:0]),
-    .dio_i (gpio_o[14:0]),
-    .dio_o (gpio_i[14:0]),
-    .dio_p ({ gpio_bd,            // 14:14
+  ad_iobuf #(.DATA_WIDTH(19)) i_iobuf (
+    .dio_t (gpio_t[18:0]),
+    .dio_i (gpio_o[18:0]),
+    .dio_o (gpio_i[18:0]),
+    .dio_p ({ gpio_bd,            // 18:14
               gpio_resetb,        // 13:13
               gpio_en_agc,        // 12:12
               gpio_ctl,           // 11: 8
@@ -131,8 +127,6 @@ module system_top (
     .gpio_i (gpio_i),
     .gpio_o (gpio_o),
     .gpio_t (gpio_t),
-    .iic_main_scl_io (iic_scl),
-    .iic_main_sda_io (iic_sda),
     .rx_clk_in (rx_clk_in),
     .rx_data_in (rx_data_in),
     .rx_frame_in (rx_frame_in),
