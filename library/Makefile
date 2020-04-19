@@ -117,6 +117,7 @@ clean:
 	$(MAKE) -C xilinx/axi_xcvrlb clean
 	$(MAKE) -C xilinx/util_adxcvr clean
 	$(MAKE) -C xilinx/util_clkdiv clean
+	$(MAKE) -C util_gpsdo clean
 
 	$(MAKE) -C interfaces clean
 
@@ -230,6 +231,7 @@ lib:
 	$(MAKE) -C xilinx/axi_xcvrlb
 	$(MAKE) -C xilinx/util_adxcvr
 	$(MAKE) -C xilinx/util_clkdiv
+	$(MAKE) -C util_gpsdo
 
 	$(MAKE) -C interfaces
 

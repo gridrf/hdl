@@ -31,6 +31,7 @@ set_property  -dict {PACKAGE_PIN  J15  IOSTANDARD LVCMOS25} [get_ports clkout_in
 
 set_property  -dict {PACKAGE_PIN  N20  IOSTANDARD LVCMOS25} [get_ports clk_40mhz]                         ; ## IO_L14P_T2_SRCC_34
 
+create_clock -name clock_txco       -period  25 [get_ports clk_40mhz]
 # iic
 
 set_property  -dict {PACKAGE_PIN  W6   IOSTANDARD LVCMOS33 PULLTYPE PULLUP} [get_ports iic_scl]           ; ## IO_L22N_T3_13                U1,W6,SCL,JX2,17,I2C_SCL
@@ -41,6 +42,7 @@ set_property  -dict {PACKAGE_PIN  V6   IOSTANDARD LVCMOS33 PULLTYPE PULLUP} [get
 set_property  -dict {PACKAGE_PIN  U8  IOSTANDARD LVCMOS33 PULLTYPE PULLUP} [get_ports dac_spi_sdi]           ; ## IO_L16P_T2_13
 set_property  -dict {PACKAGE_PIN  W10   IOSTANDARD LVCMOS33 PULLTYPE PULLUP} [get_ports dac_spi_sclk]          ; ## IO_L17N_T2_13  
 set_property  -dict {PACKAGE_PIN  U9   IOSTANDARD LVCMOS33 PULLTYPE PULLUP} [get_ports dac_spi_sync_n]        ; ## IO_L17P_T2_13 
+
 
 ##    reference-only
 ##    --------------

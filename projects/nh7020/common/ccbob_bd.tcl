@@ -1,8 +1,8 @@
 
 # lbfmc
 
-ad_connect  sys_ps7/ENET1_GMII_RX_CLK GND
-ad_connect  sys_ps7/ENET1_GMII_TX_CLK GND
+#ad_connect  sys_ps7/ENET1_GMII_RX_CLK GND
+#ad_connect  sys_ps7/ENET1_GMII_TX_CLK GND
 
 # un-used io (regular)
 

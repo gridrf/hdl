@@ -63,12 +63,12 @@ ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_PERIPHERAL_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_ENET0_IO "MIO 16 .. 27"
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_GRP_MDIO_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_GRP_MDIO_IO "MIO 52 .. 53"
-ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_PERIPHERAL_ENABLE 1
+#ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_PERIPHERAL_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET_RESET_SELECT "Separate reset pins"
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_RESET_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_ENET0_RESET_IO "MIO 8"
-ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_RESET_ENABLE 1
-ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_RESET_IO "MIO 51"
+#ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_RESET_ENABLE 1
+#ad_ip_parameter sys_ps7 CONFIG.PCW_ENET1_RESET_IO "MIO 51"
 ad_ip_parameter sys_ps7 CONFIG.PCW_SD0_PERIPHERAL_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_SD0_GRP_CD_ENABLE 1
 ad_ip_parameter sys_ps7 CONFIG.PCW_SD0_GRP_CD_IO "MIO 50"
@@ -213,6 +213,22 @@ ad_connect enable axi_ad9361/enable
 ad_connect txnrx axi_ad9361/txnrx
 ad_connect up_enable axi_ad9361/up_enable
 ad_connect up_txnrx axi_ad9361/up_txnrx
+
+# gpsdo
+create_bd_port -dir I -type clk gpsdo_ref_clk
+create_bd_port -dir O gpsdo_locked
+create_bd_port -dir O gpsdo_dac_sclk
+create_bd_port -dir O gpsdo_dac_mosi
+create_bd_port -dir O gpsdo_dac_sync_n
+
+ad_ip_instance util_gpsdo util_gpsdo_ref
+ad_connect gpsdo_ref_clk util_gpsdo_ref/refclk
+ad_connect sys_cpu_resetn util_gpsdo_ref/resetn
+ad_connect gps_pps util_gpsdo_ref/ref
+ad_connect util_gpsdo_ref/locked gpsdo_locked
+ad_connect util_gpsdo_ref/sclk gpsdo_dac_sclk
+ad_connect util_gpsdo_ref/mosi gpsdo_dac_mosi
+ad_connect util_gpsdo_ref/sync_n gpsdo_dac_sync_n
 
 # tdd-sync
 
