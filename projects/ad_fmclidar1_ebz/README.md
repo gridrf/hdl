@@ -15,13 +15,26 @@ Currently supported carriers:
 | ------------- | ------------- |
 |  ZC706        |   FMC_HPC     |
 |  ZCU102       |   HPC0        |
-|  Arria10SOC   |   FMCA_HPC    |
+|  Arria10SOC*  |   FMCA_HPC    |
 
 The design is easily portable to any Xilinx or Intel FPGA carrier board, which
 has an FMC HPC connector, and have all the required connections. (See more info
 in [system_constr.xdc](./zc706/system_constr.xdc) or [system_project.tcl](./a10soc/system_project.tcl))
 
 You can find a porting guide in the [wiki.analog.com](https://wiki.analog.com/resources/fpga/docs/hdl/porting_project_quick_start_guide).
+
+### NOTE
+
+The Arria10SOC carrier requires a hardware rework to function correctly.
+The rework connects FMC_A header pins directly to the FPGA so that they can be
+accessed by the fabric.
+
+#### Changes required:
+
+**REMOVE**:   R575, R576, R621, R633, R612, R613
+
+**POPULATE**: R574, R577, R620, R632, R610, R611
+
 
 ### Directory Structure
 
@@ -100,6 +113,20 @@ parameter and attributes.
 | Lane rate | 10Gbps |
 | GT reference clock | 250MHz |
 | Device clock | 250 MHz | 
+
+## Known issues
+
+### The Lidar boards do not power up 
+
+**Problem:** The Lidar boards do not power up because the PG_C2M pull-up resistor value on the carrier (Arria 10) is too high. 
+
+**Solution:** On Arria 10 - place a 4k7 ohms resistor in parallel with R5517.
+
+**Note:** 
+
+1. The PG_C2M can no longer be software controlled. As soon as there is an auxiliary 3V3 on the carrier, the Lidar platform receives the power up command.
+2. This problem only affects Lidar Rev B.
+
 
 ## References
 

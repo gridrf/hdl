@@ -35,15 +35,21 @@ set_interface_property sys_spi_vco EXPORT_OF sys_spi_vco.external
 
 # I2C interface for AFE's DAC chip - activate the second I2C HPS interface
 
-set_hps_io IO_SHARED_Q4_08 I2C0:SDA
-set_hps_io IO_SHARED_Q4_08 I2C0:SCL
-set_instance_parameter_value sys_hps {HPS_IO_Enable} $hps_io_list
+set_instance_parameter_value sys_hps {I2C0_PinMuxing} {FPGA}
+set_instance_parameter_value sys_hps {I2C0_Mode} {default}
+
+add_interface sys_hps_i2c_0 conduit end
+set_interface_property sys_hps_i2c_0 EXPORT_OF sys_hps.i2c0
+add_interface sys_hps_i2c_0_scl_out clock source
+set_interface_property sys_hps_i2c_0_scl_out EXPORT_OF sys_hps.i2c0_clk
+add_interface sys_hps_i2c_0_scl_in clock sink
+set_interface_property sys_hps_i2c_0_scl_in EXPORT_OF sys_hps.i2c0_scl_in
 
 # SPI interface for AFE's ADC chip - fSCLK = 10 MHz
 
 add_instance sys_spi_afe_adc altera_avalon_spi
 set_instance_parameter_value sys_spi_afe_adc {clockPhase} {0}
-set_instance_parameter_value sys_spi_afe_adc {clockPolarity} {0}
+set_instance_parameter_value sys_spi_afe_adc {clockPolarity} {1}
 set_instance_parameter_value sys_spi_afe_adc {dataWidth} {8}
 set_instance_parameter_value sys_spi_afe_adc {masterSPI} {1}
 set_instance_parameter_value sys_spi_afe_adc {numberOfSlaves} {8}

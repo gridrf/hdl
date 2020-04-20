@@ -33,6 +33,7 @@ adi_ip_files ad_ip_jesd204_tpl_dac [list \
   "$ad_hdl_dir/library/common/ad_dds_2.v" \
   "$ad_hdl_dir/library/common/ad_dds_1.v" \
   "$ad_hdl_dir/library/common/ad_dds.v" \
+  "$ad_hdl_dir/library/common/ad_iqcor.v" \
   "$ad_hdl_dir/library/common/ad_perfect_shuffle.v" \
   "$ad_hdl_dir/library/common/ad_rst.v" \
   "$ad_hdl_dir/library/common/up_axi.v" \
@@ -54,6 +55,9 @@ adi_ip_files ad_ip_jesd204_tpl_dac [list \
   "ad_ip_jesd204_tpl_dac.v" ]
 
 adi_ip_properties ad_ip_jesd204_tpl_dac
+
+adi_init_bd_tcl
+adi_ip_bd ad_ip_jesd204_tpl_dac "bd/bd.tcl"
 
 set cc [ipx::current_core]
 
@@ -141,6 +145,7 @@ set i 0
 
 foreach {k v w} {
   "DATAPATH_DISABLE" "Disable Datapath" "checkBox" \
+  "IQCORRECTION_DISABLE" "Disable IQ Correction" "checkBox" \
   "DDS_TYPE" "DDS Type" "comboBox" \
   "DDS_CORDIC_DW" "CORDIC DDS Data Width" "text" \
   "DDS_CORDIC_PHASE_DW" "CORDIC DDS Phase Width" "text" \
@@ -153,6 +158,8 @@ foreach {k v w} {
   ] $p
   incr i
 }
+
+adi_add_auto_fpga_spec_params
 
 ipx::create_xgui_files [ipx::current_core]
 ipx::save_core [ipx::current_core]
