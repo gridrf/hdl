@@ -3,7 +3,7 @@ source ../../scripts/adi_env.tcl
 source $ad_hdl_dir/projects/scripts/adi_project_xilinx.tcl
 source $ad_hdl_dir/projects/scripts/adi_board.tcl
 
-set p_device "xc7z035ifbg676-2L"
+set p_device "xc7z030ifbg676-2L"
 adi_project adrv9361z7035_ccbob_lvds
 adi_project_files adrv9361z7035_ccbob_lvds [list \
   "$ad_hdl_dir/library/xilinx/common/ad_iobuf.v" \

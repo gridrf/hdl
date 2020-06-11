@@ -1,5 +1,5 @@
 
-source ../common/adrv9364z7020_bd.tcl
+source ../common/nh7020_bd.tcl
 source ../common/ccbob_bd.tcl
 
 ad_ip_parameter util_ad9361_divclk CONFIG.SEL_0_DIV 2

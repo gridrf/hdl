@@ -3,13 +3,13 @@
 ## Auto-generated, do not modify!
 ####################################################################################
 
-PROJECT_NAME := adrv9364z7020_ccbox_lvds
+PROJECT_NAME := nh7020_ccbox_lvds
 
 M_DEPS += ../common/ccbox_constr.xdc
 M_DEPS += ../common/ccbox_bd.tcl
-M_DEPS += ../common/adrv9364z7020_constr_lvds.xdc
-M_DEPS += ../common/adrv9364z7020_constr.xdc
-M_DEPS += ../common/adrv9364z7020_bd.tcl
+M_DEPS += ../common/nh7020_constr_lvds.xdc
+M_DEPS += ../common/nh7020_constr.xdc
+M_DEPS += ../common/nh7020_bd.tcl
 M_DEPS += ../../../library/xilinx/common/ad_iobuf.v
 M_DEPS += ../../../library/axi_ad9361/axi_ad9361_delay.tcl
 
