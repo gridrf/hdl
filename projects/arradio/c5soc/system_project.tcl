@@ -6,6 +6,9 @@ adi_project arradio_c5soc
 
 source $ad_hdl_dir/projects/common/c5soc/c5soc_system_assign.tcl
 
+# files
+set_global_assignment -name VERILOG_FILE ../../../library/common/ad_iobuf.v
+
 # ad9361 interface
 
 set_location_assignment PIN_H15 -to rx_clk_in               ; ##  HSMC_CLKIN_p2   P201.156
@@ -112,7 +115,6 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to txnrx
 set_instance_assignment -name IO_MAXIMUM_TOGGLE_RATE "40 MHz" -to enable
 set_instance_assignment -name IO_MAXIMUM_TOGGLE_RATE "40 MHz" -to txnrx
 
-set_location_assignment PIN_AA26  -to ad9361_clk_out        ; ##  HSMC_CLKIN_p1   P201.96
 set_location_assignment PIN_C4    -to ad9361_resetb         ; ##  HSMC_TX_n3      P201.67
 set_location_assignment PIN_C5    -to ad9361_en_agc         ; ##  HSMC_TX_p4      P201.71
 set_location_assignment PIN_D5    -to ad9361_sync           ; ##  HSMC_TX_n4      P201.73

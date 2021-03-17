@@ -134,7 +134,6 @@ module system_top (
 
   output  [  3:0]   gpio_ctl,
   input   [  7:0]   gpio_status,
-  input             ad9361_clk_out,
   output            ad9361_resetb,
   output            ad9361_en_agc,
   output            ad9361_sync,
@@ -188,8 +187,11 @@ module system_top (
   assign ga0 = 1'b0;
   assign ga1 = 1'b0;
 
-  ALT_IOBUF scl_iobuf (.i(1'b0), .oe(i2c0_out_clk), .o(i2c0_scl_in_clk), .io(scl));
-  ALT_IOBUF sda_iobuf (.i(1'b0), .oe(i2c0_out_data), .o(i2c0_sda), .io(sda));
+  ad_iobuf #(.DATA_WIDTH(2)) i_iobuf_i2c (
+    .dio_t ({i2c0_out_clk,i2c0_out_data}),
+    .dio_i (2'b0),
+    .dio_o ({i2c0_scl_in_clk,i2c0_sda}),
+    .dio_p ({scl,sda}));
 
   // instantiations
 
@@ -215,6 +217,7 @@ module system_top (
     .sys_gpio_bd_out_port (sys_gpio_bd_o),
     .sys_gpio_in_export (sys_gpio_i),
     .sys_gpio_out_export (sys_gpio_o),
+    .pr_rom_data_nc_rom_data('h0),
     .sys_hps_h2f_reset_reset_n (sys_resetn),
     .sys_hps_hps_io_hps_io_emac1_inst_TX_CLK (eth1_tx_clk),
     .sys_hps_hps_io_hps_io_emac1_inst_TXD0 (eth1_tx_d[0]),
